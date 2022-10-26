@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Pop } from '../pop';
 import { PopService } from '../pop.service';
@@ -9,16 +8,33 @@ import { PopService } from '../pop.service';
   templateUrl: './pops.component.html',
   styleUrls: ['./pops.component.css'],
 })
-export class PopComponent {
+export class PopsComponent implements OnInit {
   pops: Pop[] = [];
 
   constructor(private popService: PopService) {}
 
-  loadPops() {
+  ngOnInit(): void {
+    this.getPops();
+  }
+
+  getPops(): void {
     this.popService.getPops().subscribe((pops) => (this.pops = pops));
   }
 
-  addPop() {}
+  add(name: string): void {
+    name = name.trim();
+    if (!name) {
+      return;
+    }
+    this.popService.addPop({ name } as Pop).subscribe((pop) => {
+      this.pops.push(pop);
+    });
+  }
+
+  delete(pop: Pop): void {
+    this.pops = this.pops.filter((h) => h !== pop);
+    this.popService.deletePop(pop.popid).subscribe();
+  }
 }
 
 /*

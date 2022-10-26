@@ -1,7 +1,34 @@
-<h2>Pops</h2>
-<a (click)="loadPops()" class="btn btn-log btn-primary" role="button">
-  Show Pops
-</a>
+<h2>My Heroes</h2>
+
+<div>
+  <label for="new-pop">Pop name: </label>
+  <input id="new-pop" #popName />
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button
+    type="button"
+    class="add-button"
+    (click)="add(popName.value); popName.value = ''"
+  >
+    Add hero
+  </button>
+</div>
+
+<ul class="pops">
+  <li *ngFor="let pop of pops">
+    <a routerLink="/detail/{{ pop.popid }}">
+      <span class="badge">{{ pop.popid }}</span> {{ pop.popname }}
+    </a>
+    <button
+      type="button"
+      class="delete"
+      title="delete pop"
+      (click)="delete(pop)"
+    >
+      x
+    </button>
+  </li>
+</ul>
 
 <!-- 
 Copyright Google LLC. All Rights Reserved.
