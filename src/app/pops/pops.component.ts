@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
-import { Pop } from './pop';
-import { PopService } from './pop.service';
+import { Pop } from '../pop';
+import { PopService } from '../pop.service';
 
 @Component({
   selector: 'app-pops',
