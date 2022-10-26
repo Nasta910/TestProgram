@@ -72,13 +72,13 @@ export class PopService {
   /** POST: add a new pop to the server */
   addPop(pop: Pop): Observable<Pop> {
     return this.http.post<Pop>(this.popsUrl, pop, this.httpOptions).pipe(
-      tap((newPop: Pop) => this.log(`added pop w/ id=${newPop.id}`)),
+      tap((newPop: Pop) => this.log(`added pop w/ id=${newPop.popid}`)),
       catchError(this.handleError<Pop>('addPop'))
     );
   }
 
   /** DELETE: delete the pop from the server */
-  deletePop(id: number): Observable<Pop> {
+  deletePop(popid: number): Observable<Pop> {
     const url = `${this.popsUrl}/${id}`;
 
     return this.http.delete<Pop>(url, this.httpOptions).pipe(

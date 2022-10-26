@@ -21,14 +21,37 @@ export class PopsComponent implements OnInit {
     this.popService.getPops().subscribe((pops) => (this.pops = pops));
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) {
+  add(
+    popName: string,
+    popNumber: number,
+    popPrice: number,
+    popShipping: number,
+    popSold: boolean,
+    popDelivered: boolean,
+    popCollection: number,
+    popStore: number,
+    popImage: string,
+    popOrderDate: string
+  ): void {
+    if (!popName) {
       return;
     }
-    this.popService.addPop({ name } as Pop).subscribe((pop) => {
-      this.pops.push(pop);
-    });
+    this.popService
+      .addPop({
+        popName,
+        popNumber,
+        popPrice,
+        popShipping,
+        popSold,
+        popDelivered,
+        popCollection,
+        popStore,
+        popImage,
+        popOrderDate,
+      } as unknown as Pop)
+      .subscribe((pop) => {
+        this.pops.push(pop);
+      });
   }
 
   delete(pop: Pop): void {
